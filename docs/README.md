@@ -1,6 +1,6 @@
 # Documentation
 
-This folder contains all product and technical specifications for the PrimeHomes Realty Real Estate Lead Bot.
+This folder contains all product and technical specifications for the **PrimeHomes Realty — Real Estate Lead Bot**.
 
 ## Core Documents
 
@@ -17,6 +17,8 @@ This folder contains all product and technical specifications for the PrimeHomes
 | [TESTING.md](TESTING.md) | Testing Specification |
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Deployment Specification |
 | [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md) | Development Setup Guide |
+| [TASK.md](TASK.md) | Task breakdown |
+| [OVERVIEW.md](OVERVIEW.md) | High-level product overview |
 
 ## How to Use
 
