@@ -9,9 +9,9 @@
 
 ## 1. Project Status
 
-**Overall Status:** 🟡 Planning / Documentation Complete  
-**Current Phase:** Implementation Preparation  
-**MVP Status:** Not yet implemented
+**Overall Status:** 🟡 Core Implementation In Progress  
+**Current Phase:** Backend + Frontend MVP + n8n Integration  
+**MVP Status:** Chat flow implemented (FastAPI + React), ready for n8n connection
 
 ### Status Legend
 
@@ -26,27 +26,27 @@
 # 2. Development Roadmap
 
 ```text
-DOCUMENTATION
+DOCUMENTATION          ✅
      ↓
-PROJECT SETUP
+PROJECT SETUP          ✅
      ↓
-DATABASE
+DATABASE (MVP)         ✅ (SQLite for local, Postgres-ready)
      ↓
-BACKEND API
+BACKEND API            🟡 (Core done)
      ↓
-FRONTEND
+FRONTEND (Chat)        🟡 (Customer chat done)
      ↓
-N8N AUTOMATION
+N8N AUTOMATION         ⬜ (Ready to connect)
      ↓
-AI PROCESSING
+AI PROCESSING          ⬜
      ↓
-LEAD QUALIFICATION
+LEAD QUALIFICATION     ⬜
      ↓
-SALES DASHBOARD
+SALES DASHBOARD        ⬜
      ↓
-TESTING
+TESTING                ⬜
      ↓
-VPS DEPLOYMENT
+VPS DEPLOYMENT         ⬜
      ↓
 MVP COMPLETE
 ```
@@ -80,9 +80,8 @@ MVP COMPLETE
 - [x] Lead qualification specification
 - [x] Testing specification
 - [x] Deployment specification
-- [ ] Environment configuration
+- [x] Environment configuration (`.env.example`)
 - [ ] Operations runbook
-- [ ] Implementation tracker
 
 ---
 
@@ -90,66 +89,48 @@ MVP COMPLETE
 
 ## Repository
 
-- [ ] Create project repository
-- [ ] Create initial branch structure
-- [ ] Create `.gitignore`
-- [ ] Create `.env.example`
-- [ ] Create README
-- [ ] Create documentation folders
-- [ ] Create frontend directory
-- [ ] Create backend directory
-- [ ] Create n8n directory
-- [ ] Create database directory
-- [ ] Create tests directory
+- [x] Create project repository
+- [x] Create `.gitignore`
+- [x] Create `.env.example`
+- [x] Create README
+- [x] Create documentation folders (`docs/`)
+- [x] Create frontend directory
+- [x] Create backend directory
+- [x] Create n8n directory
+- [x] Create database directory
+- [x] Create tests directory
+- [x] Clean root (all specs moved to `docs/`)
 
 ## Development Environment
 
-- [ ] Install Node.js
-- [ ] Install Python
-- [ ] Create Python virtual environment
-- [ ] Install backend dependencies
-- [ ] Install frontend dependencies
-- [ ] Install/configure PostgreSQL
-- [ ] Configure n8n
-- [ ] Configure environment variables
+- [x] Backend structure ready
+- [x] Frontend structure ready
+- [x] Docker Compose for Postgres + n8n
+- [ ] Configure n8n workflow on your machine
 - [ ] Verify all services locally
 
 ---
 
 # 5. Database
 
-## PostgreSQL Setup
+## Current MVP Approach
 
-- [ ] Create PostgreSQL database
-- [ ] Configure database connection
-- [ ] Create SQLAlchemy models
-- [ ] Configure Alembic
-- [ ] Create initial migration
-- [ ] Run migration successfully
-- [ ] Create seed data
+- [x] SQLite for local development (easy start)
+- [x] SQLAlchemy models created (`Lead`, `Conversation`, `Message`)
+- [x] Tables auto-created on startup
+- [ ] Switch to PostgreSQL when ready
+- [ ] Alembic migrations
 
-## Core Tables
+## Core Tables (MVP)
 
-- [ ] `users`
-- [ ] `roles`
-- [ ] `leads`
-- [ ] `conversations`
-- [ ] `messages`
+- [x] `leads`
+- [x] `conversations`
+- [x] `messages`
 - [ ] `lead_scores`
 - [ ] `lead_assignments`
 - [ ] `follow_ups`
 - [ ] `activities`
-- [ ] `integration_syncs`
-
-## Database Validation
-
-- [ ] Test relationships
-- [ ] Test constraints
-- [ ] Test indexes
-- [ ] Test timestamps
-- [ ] Test UUID generation
-- [ ] Test duplicate message prevention
-- [ ] Test migrations
+- [ ] `users` / `roles`
 
 ---
 
@@ -157,433 +138,106 @@ MVP COMPLETE
 
 ## Project Setup
 
-- [ ] Create FastAPI application
-- [ ] Configure application settings
-- [ ] Configure database connection
-- [ ] Configure logging
-- [ ] Configure CORS
-- [ ] Configure API versioning
-- [ ] Add health endpoint
+- [x] Create FastAPI application
+- [x] Configure application settings (`core/config.py`)
+- [x] Configure database connection
+- [x] Configure CORS
+- [x] Add health endpoint (`GET /api/v1/health`)
+- [x] Root endpoint
 
-## Authentication
+## Lead & Chat APIs (MVP)
 
-- [ ] Implement login
-- [ ] Implement JWT authentication
-- [ ] Implement password hashing
-- [ ] Implement role handling
-- [ ] Protect internal endpoints
+- [x] `POST /api/v1/chat` — main customer chat endpoint
+- [x] `GET /api/v1/leads`
+- [x] `GET /api/v1/leads/{id}`
+- [x] `PATCH /api/v1/leads/{id}`
+- [x] Create lead + conversation automatically on first message
+- [x] Store customer + bot messages
+- [x] Trigger n8n webhook on new message
+- [x] Safe fallback bot reply if n8n is offline
 
-## Lead APIs
+## Still Needed
 
-- [ ] `POST /api/v1/leads`
-- [ ] `GET /api/v1/leads`
-- [ ] `GET /api/v1/leads/{id}`
-- [ ] `PATCH /api/v1/leads/{id}`
-- [ ] Lead status update
+- [ ] Authentication (JWT)
+- [ ] Lead status transition rules
 - [ ] Lead assignment
-- [ ] Lead qualification endpoint
-- [ ] Lead filtering
-- [ ] Lead search
-- [ ] Lead pagination
-
-## Conversation APIs
-
-- [ ] Create conversation
-- [ ] Get conversation
-- [ ] Get conversation messages
-- [ ] Create customer message
-- [ ] Create bot message
-- [ ] Message processing status
-- [ ] Message idempotency
-
-## Follow-Up APIs
-
-- [ ] Create follow-up
-- [ ] Get follow-ups
-- [ ] Update follow-up
-- [ ] Complete follow-up
-- [ ] Cancel follow-up
-
-## Activity APIs
-
-- [ ] Create activity
-- [ ] Get activity history
-- [ ] Track assignment
-- [ ] Track status changes
+- [ ] Qualification endpoint
+- [ ] Follow-up APIs
+- [ ] Activity log
 
 ---
 
 # 7. React Frontend
 
-## Customer Interface
+## Customer Interface (Done)
 
-- [ ] Create React application
-- [ ] Create customer layout
-- [ ] Build chat interface
-- [ ] Build message component
-- [ ] Build message input
-- [ ] Add send functionality
-- [ ] Add loading state
-- [ ] Add typing indicator
-- [ ] Add failed-message state
-- [ ] Add retry functionality
-- [ ] Add conversation persistence
+- [x] Create React + Vite + TypeScript application
+- [x] Modern orange & yellow color palette
+- [x] Clean chat interface
+- [x] Message bubbles (user + bot)
+- [x] Message input + Send
+- [x] Loading / typing indicator
+- [x] Error handling
+- [x] Conversation + Lead ID persistence in session
+- [x] Responsive design
 
-## Lead Information
+## Still Needed
 
-- [ ] Display extracted customer information
-- [ ] Display property requirements
-- [ ] Display lead status where appropriate
-- [ ] Add optional lead form
-- [ ] Add progressive information collection
-
-## Sales Dashboard
-
-- [ ] Dashboard layout
-- [ ] Lead list
-- [ ] Lead search
-- [ ] Lead filtering
-- [ ] Lead sorting
-- [ ] Lead details
-- [ ] Conversation history
-- [ ] Lead score display
-- [ ] Lead classification display
-- [ ] Lead status update
-- [ ] Lead assignment
-- [ ] Follow-up management
-- [ ] Activity timeline
+- [ ] Sales dashboard
+- [ ] Lead list / detail views
+- [ ] Status update UI
+- [ ] Notes & follow-ups
 
 ---
 
 # 8. n8n Automation
 
-## Core Workflow
+## Ready for Connection
 
-### `PRH-LEAD-PROCESS-MESSAGE`
-
-- [ ] Create webhook
-- [ ] Authenticate webhook
-- [ ] Validate incoming event
-- [ ] Check idempotency
-- [ ] Retrieve lead context
-- [ ] Retrieve conversation history
-- [ ] Send message to AI
+- [x] Backend calls `N8N_WEBHOOK_URL` on every new customer message
+- [ ] Create `PRH-LEAD-PROCESS-MESSAGE` workflow in n8n
+- [ ] AI extraction node
 - [ ] Validate AI output
-- [ ] Merge extracted information
-- [ ] Check missing information
-- [ ] Trigger qualification
-- [ ] Generate response
-- [ ] Save response
-- [ ] Return/send response
-
-## Qualification Workflow
-
-### `PRH-LEAD-QUALIFY`
-
-- [ ] Receive lead data
-- [ ] Apply scoring rules
-- [ ] Calculate score
-- [ ] Determine classification
-- [ ] Save score history
-- [ ] Update lead
-
-## Sales Notification
-
-### `PRH-LEAD-NOTIFY-SALES`
-
-- [ ] Detect HOT lead
-- [ ] Retrieve lead details
-- [ ] Generate notification
-- [ ] Send notification
-- [ ] Record notification activity
-
-## Follow-Up
-
-### `PRH-FOLLOWUP-REMINDER`
-
-- [ ] Detect due follow-ups
-- [ ] Retrieve lead
-- [ ] Send reminder
-- [ ] Update follow-up status
-- [ ] Record activity
-
-## Google Sheets
-
-### `PRH-SHEET-SYNC-LEAD`
-
-- [ ] Create Google Sheet structure
-- [ ] Configure authentication
-- [ ] Create lead sync
-- [ ] Handle updates
-- [ ] Handle sync failures
-- [ ] Prevent duplicate rows
-
-## Error Handling
-
-### `PRH-ERROR-HANDLER`
-
-- [ ] Capture workflow errors
-- [ ] Record error details
-- [ ] Notify administrator where necessary
-- [ ] Support retry
-- [ ] Prevent customer data loss
+- [ ] Update lead via FastAPI
+- [ ] Generate smart reply
+- [ ] Notify sales on HOT leads
 
 ---
 
-# 9. AI
+# 9. Current Priority (What to do next on your machine)
 
-## AI Extraction
-
-- [ ] Implement intent extraction
-- [ ] Implement transaction type extraction
-- [ ] Implement property type extraction
-- [ ] Implement bedroom extraction
-- [ ] Implement location extraction
-- [ ] Implement budget extraction
-- [ ] Implement timeline extraction
-- [ ] Implement name extraction
-- [ ] Implement email extraction
-- [ ] Implement phone extraction
-- [ ] Implement confidence score
-
-## AI Response
-
-- [ ] Create response-generation prompt
-- [ ] Create clarification-question prompt
-- [ ] Create human-handoff behavior
-- [ ] Add conversation context
-- [ ] Prevent unsupported claims
-- [ ] Add fallback response
-
-## AI Reliability
-
-- [ ] Validate structured output
-- [ ] Handle invalid AI output
-- [ ] Handle AI timeout
-- [ ] Handle AI failure
-- [ ] Add retry strategy
-- [ ] Version prompts
-- [ ] Create evaluation dataset
-- [ ] Run regression tests
+1. [x] Backend core + chat endpoint
+2. [x] Frontend customer chat (orange/yellow theme)
+3. [ ] Start backend + frontend locally
+4. [ ] Start n8n and create the process-message webhook
+5. [ ] Point `N8N_WEBHOOK_URL` to your n8n webhook
+6. [ ] Test end-to-end message → n8n → reply
+7. [ ] Add AI extraction inside n8n
+8. [ ] Add lead scoring rules
 
 ---
 
-# 10. Lead Qualification
+# 10. How to Run Locally (Quick Reference)
 
-## Scoring
+```bash
+# Backend
+cd backend
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
 
-- [ ] Implement intent score
-- [ ] Implement property requirement score
-- [ ] Implement location score
-- [ ] Implement budget score
-- [ ] Implement timeline score
-- [ ] Implement contact information score
-
-## Classification
-
-- [ ] Implement HOT
-- [ ] Implement WARM
-- [ ] Implement COLD
-- [ ] Implement UNQUALIFIED
-
-## Validation
-
-- [ ] Test score = 0
-- [ ] Test score = 100
-- [ ] Test classification boundaries
-- [ ] Test score recalculation
-- [ ] Test score reasons
-- [ ] Test incomplete leads
-
----
-
-# 11. Customer Experience
-
-- [ ] Customer sends message
-- [ ] Message appears immediately
-- [ ] Backend receives message
-- [ ] AI processes message
-- [ ] Lead information is extracted
-- [ ] Missing information is identified
-- [ ] Bot asks useful clarification
-- [ ] Lead is stored
-- [ ] Lead is scored
-- [ ] Customer receives response
-- [ ] Sales team receives HOT lead notification
-- [ ] Sales agent can view lead
-- [ ] Sales agent can follow up
-
----
-
-# 12. Testing
-
-## Backend
-
-- [ ] Health endpoint test
-- [ ] Authentication tests
-- [ ] Lead creation test
-- [ ] Lead retrieval test
-- [ ] Lead update test
-- [ ] Message creation test
-- [ ] Validation tests
-- [ ] Authorization tests
-
-## Database
-
-- [ ] Model tests
-- [ ] Relationship tests
-- [ ] Constraint tests
-- [ ] Migration tests
-- [ ] Transaction tests
-
-## AI
-
-- [ ] BUY scenario
-- [ ] RENT scenario
-- [ ] LAND scenario
-- [ ] Missing information
-- [ ] Human-agent request
-- [ ] Unclear message
-- [ ] Ambiguous budget
-- [ ] Hallucination prevention
-
-## n8n
-
-- [ ] Successful workflow
-- [ ] Invalid input
-- [ ] Duplicate event
-- [ ] AI failure
-- [ ] Database/API failure
-- [ ] Notification failure
-- [ ] Google Sheets failure
-
-## Frontend
-
-- [ ] Send message
-- [ ] Receive response
-- [ ] Loading state
-- [ ] Error state
-- [ ] Retry
-- [ ] Lead list
-- [ ] Lead details
-- [ ] Lead update
-
-## End-to-End
-
-- [ ] Complete customer journey
-- [ ] HOT lead journey
-- [ ] Incomplete lead journey
-- [ ] Human handoff journey
-- [ ] Failed AI journey
-
----
-
-# 13. VPS Deployment
-
-## Server
-
-- [ ] Provision VPS
-- [ ] Install Ubuntu LTS
-- [ ] Create deploy user
-- [ ] Configure SSH
-- [ ] Install Docker
-- [ ] Install Docker Compose
-- [ ] Configure firewall
-
-## Application
-
-- [ ] Clone repository
-- [ ] Configure production `.env`
-- [ ] Build frontend
-- [ ] Build backend
-- [ ] Configure PostgreSQL
-- [ ] Configure n8n
-- [ ] Configure Docker volumes
-- [ ] Run migrations
-- [ ] Start services
-
-## Nginx
-
-- [ ] Configure domain
-- [ ] Configure API subdomain
-- [ ] Configure n8n subdomain
-- [ ] Configure reverse proxy
-- [ ] Configure HTTPS
-- [ ] Configure SSL renewal
-
-## Production Validation
-
-- [ ] Frontend accessible
-- [ ] API accessible
-- [ ] Database connected
-- [ ] n8n accessible
-- [ ] AI processing works
-- [ ] Customer message works
-- [ ] Sales notification works
-- [ ] Google Sheets sync works
-- [ ] Backups configured
-- [ ] VPS restart tested
-
----
-
-# 14. MVP Definition of Done
-
-The MVP is complete when a customer can:
-
-```text
-Send Message
-     ↓
-React
-     ↓
-FastAPI
-     ↓
-n8n
-     ↓
-AI
-     ↓
-Extract Requirements
-     ↓
-Store Lead
-     ↓
-Calculate Score
-     ↓
-Classify Lead
-     ↓
-Generate Response
-     ↓
-Notify Sales if Required
+# Frontend (new terminal)
+cd frontend
+npm install
+npm run dev
 ```
 
-And the sales team can:
-
-- [ ] View the lead
-- [ ] View conversation
-- [ ] View extracted requirements
-- [ ] View score
-- [ ] View classification
-- [ ] View/update status
-- [ ] Take follow-up action
+Then open http://localhost:5173
 
 ---
 
-# 15. Current Priority
-
-## 🔥 Next Tasks
-
-1. [ ] Create `ENVIRONMENT_CONFIG.md`
-2. [ ] Create `OPERATIONS_RUNBOOK.md`
-3. [ ] Create initial repository structure
-4. [ ] Set up backend
-5. [ ] Set up PostgreSQL
-6. [ ] Create database models
-7. [ ] Create first migration
-8. [ ] Implement FastAPI health endpoint
-9. [ ] Implement lead API
-10. [ ] Implement conversation/message API
-
----
-
-# 16. Agentic Development Rule
+# 11. Agentic Development Rule
 
 When using an AI coding agent:
 
@@ -592,32 +246,6 @@ When using an AI coding agent:
 3. Pick one task or a small related group.
 4. Implement only that scope.
 5. Run the relevant tests.
-6. Update `IMPLEMENTATION.md`.
-7. Mark the completed task here.
-8. Do not silently change architecture.
-9. Do not introduce unnecessary technologies.
-10. If a requirement is unclear, stop and document the question before making a major assumption.
-
----
-
-# 17. Task Completion Format
-
-When completing a task, update:
-
-```text
-Task:
-Status:
-Implementation:
-Files Changed:
-Tests:
-Notes:
-Next Task:
-```
-
----
-
-# 18. Current Project Principle
-
-> Build the simplest reliable system that solves the business problem.
-
-Do not add technology, abstraction, infrastructure, or complexity unless there is a clear reason for it.
+6. Mark the completed task here.
+7. Do not silently change architecture.
+8. Do not introduce unnecessary technologies.
