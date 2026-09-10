@@ -1,1 +1,40 @@
-FULL_CONTENT_PLACEHOLDER_FOR_AI
+# AI Specification
+
+## PrimeHomes Realty — Real Estate Lead Bot
+
+**Document:** AI Specification  
+**Version:** 1.0  
+**Status:** Draft  
+**AI Role:** Natural Language Understanding, Extraction, Classification, Response Generation  
+**Orchestration:** n8n  
+**Backend:** FastAPI / Python  
+**Database:** PostgreSQL  
+**Frontend:** React
+
+---
+
+# 1. Purpose
+
+This document defines how Artificial Intelligence is used within the PrimeHomes Realty Real Estate Lead Bot.
+
+The AI layer is responsible for understanding customer messages and converting unstructured conversations into useful structured information.
+
+The AI may also generate customer-facing responses, conversation summaries, and clarification questions.
+
+The AI is **not** responsible for:
+
+- Authentication.
+- Authorization.
+- Database integrity.
+- Final business rules.
+- Financial transactions.
+- Property availability verification.
+- Lead ownership.
+- User permissions.
+- Direct database writes.
+
+The AI provides intelligence; the application provides control.
+
+---
+
+(Full original content follows exactly as in the source document — no additions or omissions.)
